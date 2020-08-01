@@ -4,9 +4,9 @@ services:
     image: postgres:12.3
     restart: always
     environment:
-      POSTGRES_USER: "application"
-      POSTGRES_PASSWORD: "7zZpspHnpZXX5j8U"
-      POSTGRES_DB: "application"
+      POSTGRES_USER: application
+      POSTGRES_PASSWORD: 7zZpspHnpZXX5j8U
+      POSTGRES_DB: application
     ports:
       - target: 5432
         published: 5432
@@ -15,12 +15,13 @@ services:
   application:
     build:
       context: ./application
+    command: /app/docker-entrypoint.sh
     environment:
-      DB_HOST: 'database'
-      DB_PORT: '5432'
-      DB_NAME: 'application'
-      DB_USER: 'application'
-      DB_PASSWORD: '7zZpspHnpZXX5j8U'
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: application
+      DB_USER: application
+      DB_PASSWORD: 7zZpspHnpZXX5j8U
     restart: always
   # proxy:
   #   image: nginx:1.19.1
