@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  database:
+    image: postgres:12.3
+    restart: always
+    environment:
+      POSTGRES_USER: "application"
+      POSTGRES_PASSWORD: "7zZpspHnpZXX5j8U"
+      POSTGRES_DB: "application"
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+  application:
+    build:
+      context: ./application
+    environment:
+      DB_HOST: 'database'
+      DB_PORT: '5432'
+      DB_NAME: 'application'
+      DB_USER: 'application'
+      DB_PASSWORD: '7zZpspHnpZXX5j8U'
+    restart: always
+  # proxy:
+  #   image: nginx:1.19.1
+  #   restart: always
+  #   ports:
+  #     - target: 80
+  #       published: 8080
+  #       protocol: tcp
+  #       mode: host
