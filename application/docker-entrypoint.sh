@@ -1,6 +1,6 @@
 #!/bin/bash
-/app/wait-for-it $DB_HOST:$DB_PORT
 
-python /app/manage.py migrate
-
-python /app/manage.py runserver
+set -e
+/app/wait-for-it.sh $DB_HOST:$DB_PORT
+python /app/manage.py migrate --noinput
+python /app/manage.py runserver 0.0.0.0:8000
