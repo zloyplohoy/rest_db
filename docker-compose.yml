@@ -7,11 +7,6 @@ services:
       POSTGRES_USER: application
       POSTGRES_PASSWORD: 7zZpspHnpZXX5j8U
       POSTGRES_DB: application
-    ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-        mode: host
   application:
     build:
       context: ./application
@@ -23,6 +18,11 @@ services:
       DB_USER: application
       DB_PASSWORD: 7zZpspHnpZXX5j8U
     restart: always
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+        mode: host
   # proxy:
   #   image: nginx:1.19.1
   #   restart: always
