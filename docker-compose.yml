@@ -4,22 +4,19 @@ services:
   database:
     image: postgres:12.3
     restart: always
-    environment:
-      POSTGRES_USER: application
-      POSTGRES_PASSWORD: 7zZpspHnpZXX5j8U
-      POSTGRES_DB: application
+    env_file: database.env
+    # ports:
+    #   - target: 5432
+    #     published: 5432
+    #     protocol: tcp
+    #     mode: host
 
   application:
     build:
       context: ./application
     command: /app/docker-entrypoint.sh
     restart: always
-    environment:
-      DB_HOST: database
-      DB_PORT: 5432
-      DB_NAME: application
-      DB_USER: application
-      DB_PASSWORD: 7zZpspHnpZXX5j8U
+    env_file: application.env
     volumes:
       - type: volume
         source: static
