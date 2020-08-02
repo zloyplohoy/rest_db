@@ -38,8 +38,11 @@ services:
     volumes:
       - type: volume
         source: static
-        target: /static
+        target: /usr/share/nginx/html/static
         volume:
           nocopy: true
+      - type: bind
+        source: ./nginx/templates
+        target: /etc/nginx/templates
 volumes:
   static:
