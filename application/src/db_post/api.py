@@ -16,8 +16,11 @@ class PostDataList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        if not request.data:
+            return Response('No data provided', status=status.HTTP_400_BAD_REQUEST)
+
         # No value encoding was specified, assuming UTF-8
-        serializer = PostDataSerializer(data={ 'post_data': request.data.decode('utf8')})
+        serializer = PostDataSerializer(data={'post_data': request.data.decode('utf8')})
 
         if serializer.is_valid():
             serializer.save()
