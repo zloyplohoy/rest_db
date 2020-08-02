@@ -1,3 +1,4 @@
+---
 version: "3.8"
 services:
   database:
@@ -7,21 +8,23 @@ services:
       POSTGRES_USER: application
       POSTGRES_PASSWORD: 7zZpspHnpZXX5j8U
       POSTGRES_DB: application
+
   application:
     build:
       context: ./application
     command: /app/docker-entrypoint.sh
+    restart: always
     environment:
       DB_HOST: database
       DB_PORT: 5432
       DB_NAME: application
       DB_USER: application
       DB_PASSWORD: 7zZpspHnpZXX5j8U
-    restart: always
     volumes:
       - type: volume
         source: static
         target: /app/static
+
   proxy:
     image: nginx:1.19.1
     restart: always
@@ -39,5 +42,7 @@ services:
       - type: bind
         source: ./nginx/templates
         target: /etc/nginx/templates
+
 volumes:
   static:
+...
