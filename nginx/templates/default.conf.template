@@ -9,12 +9,14 @@ server {
     }
 
     location /api/ {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
         proxy_pass http://application:8000/api/;
     }
 
-    location /api/db_post {
+    location /admin/ {
+        proxy_pass http://application:8000/admin/;
+    }
+
+    location /api/db_post/ {
         if ($request_method = GET) {
             return 405;
         }
