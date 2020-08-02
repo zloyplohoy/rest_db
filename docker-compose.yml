@@ -22,11 +22,6 @@ services:
       - type: volume
         source: static
         target: /app/static
-    ports:
-      - target: 8000
-        published: 8000
-        protocol: tcp
-        mode: host
   proxy:
     image: nginx:1.19.1
     restart: always
